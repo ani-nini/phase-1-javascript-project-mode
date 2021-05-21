@@ -10,12 +10,13 @@ fact_btn.addEventListener('click', fetchFact)
 function fetchPic(){
     fetch('https://random.dog/woof.json')
         .then(resp => resp.json())
-        .then(data => { randomDogPic(data)
-            //console.log(data);
-        //picture.innerHTML = `<img src = "${data.url}"/>`
+        .then(data => {
+            if (data.url.includes('.mp4')){
+                fetchPic()
+            } else{
+                randomDogPic(data)
+            }        
     })
-    .catch(err => console.log(error))
-
 }
 
 function randomDogPic(pictureData){
@@ -25,9 +26,8 @@ function randomDogPic(pictureData){
     let img = document.createElement('img')
     img.src = pictureData.url
     picture.appendChild(img)
-
+    
 }
-
 
 function fetchFact(){
     fetch('https://cat-fact.herokuapp.com/facts/random?animal_type=dog&amount=1')
@@ -37,17 +37,13 @@ function fetchFact(){
             fact.textContent = data.text;
     })
     .catch(err => console.log(error))
-
 }
 
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
-
-// Your JavaScript code goes here!
-
 const heartBtn = document.querySelectorAll(".like-glyph");
 
-//every heart event that was clicked, invoke likeCallBack Function
+
 for (const glyph of heartBtn) {
   glyph.addEventListener("click", likeCallBack)
 }
@@ -73,12 +69,6 @@ function likeCallBack(e) {
   })
 }
 
-
-
-//------------------------------------------------------------------------------
-// Don't change the code below: this function mocks the server response
-//------------------------------------------------------------------------------
-
 function mimicServerCall(url="http://mimicServer.example.com", config={}) {
   return new Promise(function(resolve, reject) {
     setTimeout(function() {
@@ -91,4 +81,3 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
     }, 300);
   });
 }
-
