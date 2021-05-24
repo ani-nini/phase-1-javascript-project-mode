@@ -45,23 +45,13 @@ button{
     width: 400px;
 }
 
-.like-glyph {
-    cursor: pointer;
-  }
-  .activated-heart {
-    color: red;
-  }
-
-  .heart {
-    border-radius: 50%;
+.heart{
     cursor: pointer;
     fill: #f8f6f6;
-    transition: .4s;
-    
+    transition: .4s;  
   }
-  
-  .liked {
-       transform: scale(1.05) rotate(360deg);
-       
+
+.liked{
+    transform: scale(1.05) rotate(360deg);   
     fill: red;
   }
