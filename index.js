@@ -17,6 +17,7 @@ function fetchPic(){
                 randomDogPic(data)
             }        
     })
+    //.catch(err => console.log(error))
 }
 
 function randomDogPic(pictureData){
@@ -33,51 +34,13 @@ function fetchFact(){
     fetch('https://cat-fact.herokuapp.com/facts/random?animal_type=dog&amount=1')
         .then(resp => resp.json())
         .then(data => { 
-            //console.log(data.text);
-            fact.textContent = data.text;
-    })
+            //console.log(data.fact);
+            fact.textContent = data.text;})
     .catch(err => console.log(error))
 }
 
-const EMPTY_HEART = '♡'
-const FULL_HEART = '♥'
-const heartBtn = document.querySelectorAll(".like-glyph");
+const likeBtn = document.querySelector('.heart');
 
-
-for (const glyph of heartBtn) {
-  glyph.addEventListener("click", likeCallBack)
-}
-
-function likeCallBack(e) {
-  const heart = e.target
-  mimicServerCall("bogusUrl")
-  .then(function(){
-    if (heart.innerText === EMPTY_HEART) {
-      heart.innerText = FULL_HEART;
-      heart.className = "activated-heart"
-    } else {
-      heart.innerText = EMPTY_HEART
-      heart.className = ""
-    }
-  })
-  .catch(function(error) {
-    const modal = document.getElementById("modal")
-    modal.className = ""
-    modal.innerText = error;
-    setTimeout(() => modal.className = "hidden", 3000)
-
-  })
-}
-
-function mimicServerCall(url="http://mimicServer.example.com", config={}) {
-  return new Promise(function(resolve, reject) {
-    setTimeout(function() {
-      let isRandomFailure = Math.random() < .2
-      if (isRandomFailure) {
-        reject("Random server error. Try again.");
-      } else {
-        resolve("Pretend remote server notified of action!");
-      }
-    }, 300);
-  });
-}
+likeBtn.addEventListener('click', function() {
+     likeBtn.classList.toggle('liked');
+});
